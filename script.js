@@ -611,11 +611,10 @@ function initContactForm() {
     
     const formData = new FormData(contactForm);
     const templateParams = {
-      from_name: formData.get('name'),
-      from_email: formData.get('email'),
+      name: formData.get('name'),
+      email: formData.get('email'),
       subject: formData.get('subject'),
-      message: formData.get('message'),
-      to_name: 'Muhammad Ghufran'
+      message: formData.get('message')
     };
     
     // Show loading state
@@ -627,24 +626,12 @@ function initContactForm() {
     submitBtn.disabled = true;
     
     try {
-      // Send main contact email
-      await emailjs.send(
+      // Try EmailJS first
+      await emailjs.sendForm(
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.TEMPLATE_CONTACT_ID,
-        templateParams
-      );
-      
-      // Send auto-reply email
-      const autoReplyParams = {
-        to_name: templateParams.from_name,
-        to_email: templateParams.from_email,
-        subject: templateParams.subject
-      };
-      
-      await emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_AUTOREPLY_ID,
-        autoReplyParams
+        contactForm,
+        EMAILJS_CONFIG.PUBLIC_KEY
       );
       
       // Show success message
@@ -654,8 +641,26 @@ function initContactForm() {
       
     } catch (error) {
       console.error('EmailJS Error:', error);
-      formStatus.className = 'form-status error';
-      formStatus.textContent = 'Failed to send message. Please try again or contact me directly at me.ghufrannaseer@gmail.com';
+      
+      // Fallback: Create mailto link with form data
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const subject = formData.get('subject');
+      const message = formData.get('message');
+      
+      const mailtoLink = `mailto:me.ghufrannaseer@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+      
+      // Show alternative contact options
+      formStatus.className = 'form-status warning';
+      formStatus.innerHTML = `
+        <div>EmailJS configuration needs to be updated. Please contact me directly:</div>
+        <div style="margin-top: 10px;">
+          <a href="${mailtoLink}" style="color: #007bff; text-decoration: underline;">📧 Send Email Directly</a>
+          <br><br>
+          <a href="mailto:me.ghufrannaseer@gmail.com" style="color: #007bff; text-decoration: underline;">me.ghufrannaseer@gmail.com</a>
+        </div>
+      `;
+      
     } finally {
       // Reset button state
       submitBtn.classList.remove('loading');
