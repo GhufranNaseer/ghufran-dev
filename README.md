@@ -164,18 +164,24 @@ The `.replit` configuration file includes:
 ## 🔐 Environment Variables
 
 ### EmailJS Configuration
-The contact form uses **EmailJS** for email delivery. The following configuration is embedded in `script.js`:
+The contact form uses **EmailJS** for email delivery. The configuration is embedded in `script.js` with the following structure:
 
 ```javascript
 const EMAILJS_CONFIG = {
-  SERVICE_ID: 'service_53j7hqq',
-  TEMPLATE_CONTACT_ID: 'template_x59a079',
-  TEMPLATE_AUTOREPLY_ID: 'template_jiuuei9',
-  PUBLIC_KEY: 'LWPy0M60E6P9nACN0'
+  SERVICE_ID: 'your_service_id',
+  TEMPLATE_CONTACT_ID: 'your_template_id',
+  TEMPLATE_AUTOREPLY_ID: 'your_autoreply_template_id',
+  PUBLIC_KEY: 'your_public_key'
 };
 ```
 
-**Note**: These are public-facing keys (not secrets) used for client-side email delivery.
+**To configure for your own use:**
+1. Create an account at [EmailJS](https://www.emailjs.com/)
+2. Set up your email service and templates
+3. Replace the placeholder values in `script.js` with your actual EmailJS credentials
+4. Test the contact form to ensure emails are being delivered
+
+**Note**: The public key is intentionally hidden in this documentation for security purposes. It's configured directly in the application code.
 
 ### Theme Persistence
 - **localStorage key**: `theme`
