@@ -287,7 +287,7 @@ This portfolio website is created for personal use. All content, including proje
 - ✅ You may fork and adapt this project as a portfolio template for your own use
 - ✅ You may reference the code structure and design patterns
 - ❌ You may not claim credit for the original work
-- ❌ You may not use the testimonials, project images, or personal information without permission
+- ❌ You may not use the testimonials, project images, or personal information without permission.
 
 For licensing inquiries or permission requests, contact: **me.ghufrannaseer@gmail.com**
 
