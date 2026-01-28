@@ -4,7 +4,7 @@ A modern, responsive personal portfolio website showcasing professional services
 
 ## 🌐 Live Demo
 
-The portfolio is deployed and accessible at: **[Portfolio Link]** *(deployment URL to be configured)*
+The portfolio is deployed and accessible at: **[(https://ghufrannaseer.github.io/ghufran-dev/)]** *(deployment URL to be configured)*
 
 *Current local deployment via Replit using Python HTTP Server on port 5000*
 
